@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    BASE_URL: "http://localhost:3000", // accessible as process.env.CUSTOM_VAR
+    NEXT_PUBLIC_API_URL: "http://localhost:3000", // accessible as process.env.CUSTOM_VAR
   },
   eslint: {
     ignoreDuringBuilds: true, // ignore eslint errors during build

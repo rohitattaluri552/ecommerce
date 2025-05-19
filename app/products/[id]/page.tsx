@@ -1,4 +1,3 @@
-import { GET_PRODUCT } from "@/app/end-points";
 import NotFoundPage from "@/app/not-found";
 
 export const dynamic = "force-dynamic"; // Force the page to be dynamic
@@ -10,7 +9,7 @@ export default async function ProductDetailPage({
 }) {
   // Fetch product data based on the ID from params
   const res = await fetch(
-    GET_PRODUCT(params.id) // Use the GET_PRODUCT endpoint
+    `${process.env.NEXT_PUBLIC_API_URL}/api/products/${params.id}` // Use the GET_PRODUCT endpoint
   ).then((res) => res.json());
   const product = res.product;
 

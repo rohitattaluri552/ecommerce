@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { GET_CART } from "../end-points";
 import { Product } from "../product-data";
 
 import ShoppingCartPage from "./ShoppingCartPage";
@@ -13,9 +12,12 @@ type CartItemResponse = {
   totalPrice: number;
 };
 export default async function CartPage({ params }: { params: { id: string } }) {
-  const res: CartItemResponse = await fetch(GET_CART, {
-    cache: "no-cache",
-  }).then((res) => res.json());
+  const res: CartItemResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/users/2/cart`,
+    {
+      cache: "no-cache",
+    }
+  ).then((res) => res.json());
 
   const { cartItems, totalCartItems, totalPrice } = res;
 

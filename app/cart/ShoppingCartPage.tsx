@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { REMOVE_FROM_CART } from "../end-points";
 import { Product } from "../product-data";
 
 export default function ShoppingCartPage({
@@ -13,13 +12,16 @@ export default function ShoppingCartPage({
   const [cartProducts, setCartProducts] = useState(initialCartProducts);
 
   async function removeFromCart(productId: string) {
-    const response = await fetch(REMOVE_FROM_CART, {
-      method: "DELETE",
-      body: JSON.stringify({ productId }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/users/2/cart`,
+      {
+        method: "DELETE",
+        body: JSON.stringify({ productId }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
 
     setCartProducts(response.cartItems);
   }

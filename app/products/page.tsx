@@ -1,15 +1,17 @@
-import { GET_CART, GET_PRODUCTS } from "../end-points";
 import ProductsList from "../productsList";
 
 export const dynamic = "force-dynamic"; // Force the page to be dynamic
 
 export default async function ProductsPage() {
-  const res = await fetch(GET_PRODUCTS);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
   const data = await res.json();
 
-  const cartRes = await fetch(GET_CART, {
-    cache: "no-cache",
-  });
+  const cartRes = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/users/2/cart`,
+    {
+      cache: "no-cache",
+    }
+  );
   const cartData = await cartRes.json();
 
   return (

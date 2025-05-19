@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ADD_TO_CART, REMOVE_FROM_CART } from "./end-points";
 import { Product } from "./product-data";
 
 export const dynamic = "force-dynamic"; // Force the page to be dynamic
@@ -18,26 +17,32 @@ export default function ProductsList({
     useState<Product[]>(initialCartProducts);
 
   async function addToCart(productId: string) {
-    const response = await fetch(ADD_TO_CART, {
-      method: "POST",
-      body: JSON.stringify({ productId }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/users/2/cart`,
+      {
+        method: "POST",
+        body: JSON.stringify({ productId }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
 
     // Update the cart products state with the new cart items
     setCartProducts(response.cartItems);
   }
 
   async function removeFromCart(productId: string) {
-    const response = await fetch(REMOVE_FROM_CART, {
-      method: "DELETE",
-      body: JSON.stringify({ productId }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/users/2/cart`,
+      {
+        method: "DELETE",
+        body: JSON.stringify({ productId }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
 
     setCartProducts(response.cartItems);
   }
